@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Metrics;
 
 namespace Net5.LogAndTrace.Web.API
 {
@@ -26,6 +28,23 @@ namespace Net5.LogAndTrace.Web.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOpenTelemetryTracing(builder =>
+            {
+                builder.AddHttpClientInstrumentation();
+                builder.AddAspNetCoreInstrumentation();
+                builder.AddSource("MyApplicationActivitySource");
+                builder.AddOtlpExporter(options => options.Endpoint = new Uri("http://localhost:4317"));
+            });
+
+
+            services.AddOpenTelemetryMetrics(builder =>
+            {
+                builder.AddHttpClientInstrumentation();
+                builder.AddAspNetCoreInstrumentation();
+                builder.AddMeter("MyApplicationMetrics");
+                builder.AddOtlpExporter(options => options.Endpoint = new Uri("http://localhost:4317"));
+            });
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
