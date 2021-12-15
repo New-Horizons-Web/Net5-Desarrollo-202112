@@ -1,0 +1,69 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "BikestoresContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Infrastruture\/Persistence\/Contexts",
+   "OutputPath": "Infrastruture\/Persistence\/Entities",
+   "ProjectRootNamespace": "EFCore.BikeStore.Web.API",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[production].[brands]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[production].[categories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[production].[products]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[production].[stocks]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[sales].[customers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[sales].[order_items]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[sales].[orders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[sales].[staffs]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[sales].[stores]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "00ea6c046e26.BikeStores",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
