@@ -1,0 +1,39 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="border-color:#7030a0">
+            <div class="card-body">
+                <h5 class="card-card-title" style="color:#7030a8">Transient</h5>
+                <p class="card-text">GUID Controller</p>
+                <p><strong style="font-size:13px;">@Model.GuidTransientController</strong></p>
+                <p class="card-text">GUID Generator</p>
+                <p><strong style="font-size:13px;">@Model.GuidTransientGenerator</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="border-color:#7030a0">
+            <div class="card-body">
+                <h5 class="card-card-title" style="color:#7030a8">Scoped</h5>
+                <p class="card-text">GUID Controller</p>
+                <p><strong style="font-size:13px;">@Model.GuidScopedController</strong></p>
+                <p class="card-text">GUID Generator</p>
+                <p><strong style="font-size:13px;">@Model.GuidScopedGenerator</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="border-color:#7030a0">
+            <div class="card-body">
+                <h5 class="card-card-title" style="color:#7030a8">Singleton</h5>
+                <p class="card-text">GUID Controller</p>
+                <p><strong style="font-size:13px;">@Model.GuidSingletonController</strong></p>
+                <p class="card-text">GUID Generator</p>
+                <p><strong style="font-size:13px;">@Model.GuidSingletonGenerator</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
