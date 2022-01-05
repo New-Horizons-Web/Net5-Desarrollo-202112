@@ -1,16 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Net5.AspNetMVC.WebController.Filters;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace Net5.AspNetMVC.WebController
+namespace Net5.AspNetCore.Client.Blazor.Wasm.Server
 {
     public class Startup
     {
@@ -22,15 +19,12 @@ namespace Net5.AspNetMVC.WebController
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(opt =>
-            {
-                opt.Filters.Add(typeof(LogAttribute));
-                opt.Filters.Add(typeof(LogAttribute));
-            });
 
-            services.AddScoped<AuditFilter>();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,35 +33,26 @@ namespace Net5.AspNetMVC.WebController
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseWebAssemblyDebugging();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
+            app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //    name: "blog",
-                //    defaults: new { controller = "Blog", action = "Article" },
-                //    pattern: "blog/{*article}");
-
-                //endpoints.MapControllerRoute(
-                //    name: "products",
-                //    defaults: new { controller = "Products", action = "List" },
-                //    pattern: "products/{*List}");
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapFallbackToFile("index.html");
             });
         }
     }

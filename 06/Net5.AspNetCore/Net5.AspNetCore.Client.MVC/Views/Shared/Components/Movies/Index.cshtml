@@ -1,0 +1,25 @@
+﻿@model List<MovieViewModel>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (MovieViewModel movie in Model)
+    {
+        <tr>
+            <td>@Html.EditorFor(modelItem => movie.Id)</td>
+            <td>@Html.EditorFor(modelItem => movie.Title)</td>
+            <td>@Html.EditorFor(modelItem => movie.Genre)</td>
+            <td>@Html.EditorFor(modelItem => movie.Price)</td>
+            <td>@Html.EditorFor(modelItem => movie.ReleaseDate)</td>
+        </tr>
+    }        
+    </tbody>
+</table>

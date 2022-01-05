@@ -1,0 +1,122 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    int age = 33;
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.PageTitle</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<p>@DateTime.Now</p>
+<p>@DateTime.IsLeapYear(2016)</p>
+<p>@await DoSomething("hello","world")</p>
+<p>Last week this time @(DateTime.Now - TimeSpan.FromDays(7))</p>
+<p>Age@(age)</p>
+
+<h4>Razor</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (MovieViewModel movie in Model.Movies)
+    {
+        <tr>
+            <td>@movie.Id</td>
+            <td>@movie.Title</td>
+            <td>@movie.Genre</td>
+            <td>@movie.Price</td>
+            <td>@movie.ReleaseDate</td>
+        </tr>
+    }        
+    </tbody>
+</table>
+
+<h4>HTML Helper</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (MovieViewModel movie in Model.Movies)
+    {
+        <tr>
+            <td>@Html.EditorFor(modelItem => movie.Id)</td>
+            <td>@Html.EditorFor(modelItem => movie.Title)</td>
+            <td>@Html.EditorFor(modelItem => movie.Genre)</td>
+            <td>@Html.EditorFor(modelItem => movie.Price)</td>
+            <td>@Html.EditorFor(modelItem => movie.ReleaseDate)</td>
+        </tr>
+    }        
+    </tbody>
+</table>
+
+<h4>Tag Helper</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (MovieViewModel movie in Model.Movies)
+    {
+        <tr>
+            <td><emphasis my-parameter="@movie.Id"></emphasis></td>
+            <td><input asp-for="@movie.Title" /></td>
+            <td><input asp-for="@movie.Genre" /></td>
+            <td><input asp-for="@movie.Price" /></td>
+            <td><input asp-for="@movie.ReleaseDate" /></td>
+        </tr>
+    }        
+    </tbody>
+</table>
+
+<h4>Partial View</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (MovieViewModel movie in Model.Movies)
+    {
+        @Html.Partial("_row",movie)
+    }        
+    </tbody>
+</table>
+
+<h4>View Component</h4>
+@await Component.InvokeAsync("Movies")
+
+
+@{
+    Task<string> DoSomething(string a, string b)
+    {
+        return Task.FromResult<string>($"{a} {b}!!");
+    }
+}

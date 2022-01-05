@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Net5.AspNetMVC.WebController.Filters;
+using Net5.AspNetCore.Client.MVC.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Net5.AspNetMVC.WebController
+namespace Net5.AspNetCore.Client.MVC
 {
     public class Startup
     {
@@ -24,13 +24,9 @@ namespace Net5.AspNetMVC.WebController
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(opt =>
-            {
-                opt.Filters.Add(typeof(LogAttribute));
-                opt.Filters.Add(typeof(LogAttribute));
-            });
+            services.AddControllersWithViews();
 
-            services.AddScoped<AuditFilter>();
+            services.AddSingleton<MovieService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,20 +47,10 @@ namespace Net5.AspNetMVC.WebController
 
             app.UseRouting();
 
-            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //    name: "blog",
-                //    defaults: new { controller = "Blog", action = "Article" },
-                //    pattern: "blog/{*article}");
-
-                //endpoints.MapControllerRoute(
-                //    name: "products",
-                //    defaults: new { controller = "Products", action = "List" },
-                //    pattern: "products/{*List}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
