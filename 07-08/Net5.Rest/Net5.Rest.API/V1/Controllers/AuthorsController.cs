@@ -4,9 +4,10 @@ using Net5.Rest.API.ApplicationServices;
 using Net5.Rest.Infrastructure.CrossCutting.Dtos;
 using System;
 
-namespace Net5.Rest.API.Controllers
+namespace Net5.Rest.API.V1.Controllers
 {
     [Route("api/authors")]
+    [ApiVersion("1.0",Deprecated =true)]
     [ApiController]
     public class AuthorsController : ControllerBase
     {
@@ -20,9 +21,9 @@ namespace Net5.Rest.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAuthors()
+        public IActionResult GetAuthors([FromQuery] AuthorsResourceParameters authorsResourceParameters)
         {
-            return Ok(_libraryApplicationService.GetAuthors());
+            return Ok(_libraryApplicationService.GetAuthors(authorsResourceParameters));
         }
 
         [HttpGet("{id}",Name ="GetAuthor")]
@@ -43,5 +44,6 @@ namespace Net5.Rest.API.Controllers
             
             return CreatedAtRoute("GetAuthor",new { id = result.AuthorId}, result);
         }
+        
     }
 }

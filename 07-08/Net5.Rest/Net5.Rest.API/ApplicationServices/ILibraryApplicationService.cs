@@ -6,8 +6,10 @@ namespace Net5.Rest.API.ApplicationServices
 {
     public interface ILibraryApplicationService
     {
-        List<AuthorDto> GetAuthors();
+        List<AuthorDto> GetAuthors(AuthorsResourceParameters authorsResourceParameters);
         AuthorDto GetAuthor(Guid authorId);
         AuthorDto CreateAuthor(AuthorForCreationDto author);
+        AuthorDto UpdateAuthor(Guid authorId, AuthorForUpdateDto author);
+        AuthorDto DeleteAuthor(Guid authorId);
     }
 }

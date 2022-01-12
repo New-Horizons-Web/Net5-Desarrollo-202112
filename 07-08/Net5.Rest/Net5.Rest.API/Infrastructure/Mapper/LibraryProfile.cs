@@ -14,6 +14,7 @@ namespace Net5.Rest.API.Infrastructure.Mapper
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge(src.DateOfDeath)));
 
             CreateMap<AuthorForCreationDto, Author>();
+            CreateMap<AuthorForUpdateDto, Author>();
             CreateMap<BookForCreationDto,Book>();
         }
     }
