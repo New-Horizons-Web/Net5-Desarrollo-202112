@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Net5.Rest.Infrastructure.CrossCutting.Dtos;
 using Net5.Rest.Infrastructure.Data.Contexts;
 using Net5.Rest.Infrastructure.Data.Entities;
+using Serilog.Context;
+using SerilogTimings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,79 +15,99 @@ namespace Net5.Rest.API.ApplicationServices
     {
         private readonly LibraryContext _context;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
         public LibraryApplicationService(
             LibraryContext context,
-            IMapper mapper
+            IMapper mapper,
+            ILogger<LibraryApplicationService> logger
         )
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
         
         public List<AuthorDto> GetAuthors(AuthorsResourceParameters authorsResourceParameters)
         {
+            List<AuthorDto> authors = new List<AuthorDto>();
 
-            var query = from a in _context.Authors
-                        select a;
-
-            if (!string.IsNullOrEmpty(authorsResourceParameters.SearchBy)) {
-                query = from a in query
-                        where
-                        a.FirstName.ToLower().Contains(authorsResourceParameters.SearchBy)
-                        || a.LastName.ToLower().Contains(authorsResourceParameters.SearchBy)
-                        || a.Genre.ToLower().Contains(authorsResourceParameters.SearchBy)
-                        select a;
-            }
-                        
-            bool isDesc = true;
-
-            if (authorsResourceParameters.OrderBy.ToLower().Contains("asc"))
+            using (Operation.Time("Getting data from the database"))
             {
-                isDesc = false;
+
+                var query = from a in _context.Authors
+                            select a;
+
+                if (!string.IsNullOrEmpty(authorsResourceParameters.SearchBy))
+                {
+                    query = from a in query
+                            where
+                            a.FirstName.ToLower().Contains(authorsResourceParameters.SearchBy)
+                            || a.LastName.ToLower().Contains(authorsResourceParameters.SearchBy)
+                            || a.Genre.ToLower().Contains(authorsResourceParameters.SearchBy)
+                            select a;
+                }
+
+                bool isDesc = true;
+
+                if (authorsResourceParameters.OrderBy.ToLower().Contains("asc"))
+                {
+                    isDesc = false;
+                }
+
+                if (authorsResourceParameters.OrderBy.ToLower().Contains("name"))
+                {
+                    if (isDesc)
+                    {
+                        query = query.OrderByDescending(o => o.FirstName);
+                    }
+                    else
+                    {
+                        query = query.OrderBy(o => o.FirstName);
+                    }
+                }
+
+                if (authorsResourceParameters.OrderBy.ToLower().Contains("age"))
+                {
+                    if (isDesc)
+                    {
+                        query = query.OrderByDescending(o => o.DateOfBirth);
+                    }
+                    else
+                    {
+                        query = query.OrderBy(o => o.DateOfBirth);
+                    }
+                }
+
+                if (authorsResourceParameters.OrderBy.ToLower().Contains("genre"))
+                {
+                    if (isDesc)
+                    {
+                        query = query.OrderByDescending(o => o.Genre);
+                    }
+                    else
+                    {
+                        query = query.OrderBy(o => o.Genre);
+                    }
+                }
+
+
+                int beginRecord = (authorsResourceParameters.PageNumber - 1) * authorsResourceParameters.PageSize;
+
+                query = query.Skip(beginRecord).Take(authorsResourceParameters.PageSize);
+
+                authors = _mapper.Map<List<AuthorDto>>(query.ToList());
             }
 
-            if (authorsResourceParameters.OrderBy.ToLower().Contains("name"))
+            using (LogContext.PushProperty("RowParsed", authors))
             {
-                if (isDesc)
-                {
-                    query = query.OrderByDescending(o => o.FirstName);
-                }
-                else
-                {
-                    query = query.OrderBy(o => o.FirstName);
-                }
+                _logger.LogWarning("Finished parsing data for GetAuthors");
             }
 
-            if (authorsResourceParameters.OrderBy.ToLower().Contains("age"))
-            {
-                if (isDesc)
-                {
-                    query = query.OrderByDescending(o => o.DateOfBirth);
-                }
-                else
-                {
-                    query = query.OrderBy(o => o.DateOfBirth);
-                }
-            }
+            _logger.LogWarning("A message generated by {AuthorName}", "Erick");
 
-            if (authorsResourceParameters.OrderBy.ToLower().Contains("genre"))
-            {
-                if (isDesc)
-                {
-                    query = query.OrderByDescending(o => o.Genre);
-                }
-                else
-                {
-                    query = query.OrderBy(o => o.Genre);
-                }
-            }
+            List<string> topics = new List<string> { "C#", ".NET", "logging" };
+            _logger.LogWarning("Another message generated by {AuthorName} - Today is {Today:yyyy-MM-dd} and I'm talking about {Topics}", "Erick",DateTime.Now.Date,topics);
 
-
-            int beginRecord = (authorsResourceParameters.PageNumber - 1) * authorsResourceParameters.PageSize;
-
-            query = query.Skip(beginRecord).Take(authorsResourceParameters.PageSize);
-
-            List<AuthorDto> authors = _mapper.Map<List<AuthorDto>>(query.ToList());
 
             return authors;
         }

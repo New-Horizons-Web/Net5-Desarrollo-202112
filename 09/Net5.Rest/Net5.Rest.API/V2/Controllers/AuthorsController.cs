@@ -27,7 +27,8 @@ namespace Net5.Rest.API.V2.Controllers
         [HttpGet]
         public IActionResult GetAuthors([FromQuery] AuthorsResourceParameters authorsResourceParameters)
         {
-            _logger.LogWarning("Log from GetAuthors method");     
+            _logger.LogError("Log from GetAuthors method");
+            _logger.LogInformation("HTTP GET: Called get method of Authors Controller");
            return Ok(_libraryApplicationService.GetAuthors(authorsResourceParameters));
         }
 

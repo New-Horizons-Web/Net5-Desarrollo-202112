@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using Net5.Rest.API.ApplicationServices;
 using Net5.Rest.API.Infrastructure.Mapper;
 using Net5.Rest.Infrastructure.Data.Contexts;
+using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
@@ -93,6 +94,8 @@ namespace Net5.Rest.API
             app.UseAuthorization();
 
             app.UseCors("ALLOW_ANY");
+
+            app.UseSerilogRequestLogging();
 
             context.EnsureSeeDataForContext();
 
