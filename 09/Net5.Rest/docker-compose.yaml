@@ -7,7 +7,7 @@ services:
     image: datalust/seq:latest
     restart: unless-stopped
     ports:
-      - 80:80
+      - 8085:80
       - 5341:5341
     volumes:
       - ./Data:/data
