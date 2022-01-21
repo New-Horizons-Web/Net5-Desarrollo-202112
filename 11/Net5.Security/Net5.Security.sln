@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net5.Security.Cross-Site-Scripting", "Net5.Security.Cross-Site-Scripting\Net5.Security.Cross-Site-Scripting.csproj", "{C384A337-AD51-4C47-B033-301E46EC6A23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net5.Security.Cross-Site-Request-Forgery", "Net5.Security.Cross-Site-Request-Forgery\Net5.Security.Cross-Site-Request-Forgery.csproj", "{94962BD1-D989-4939-BD55-35EF85E99C07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net5.Security.Cross-Site-Request-Forgery.Attacker", "Net5.Security.Cross-Site-Request-Forgery.Attacker\Net5.Security.Cross-Site-Request-Forgery.Attacker.csproj", "{9AA4884E-CD94-44F0-A94B-B7056D1CC5DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net5.Security.JWT", "Net5.Security.JWT\Net5.Security.JWT.csproj", "{5F5F4F49-8B03-43AD-8891-1BB9459CFE61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C384A337-AD51-4C47-B033-301E46EC6A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C384A337-AD51-4C47-B033-301E46EC6A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C384A337-AD51-4C47-B033-301E46EC6A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C384A337-AD51-4C47-B033-301E46EC6A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94962BD1-D989-4939-BD55-35EF85E99C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94962BD1-D989-4939-BD55-35EF85E99C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94962BD1-D989-4939-BD55-35EF85E99C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94962BD1-D989-4939-BD55-35EF85E99C07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA4884E-CD94-44F0-A94B-B7056D1CC5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA4884E-CD94-44F0-A94B-B7056D1CC5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA4884E-CD94-44F0-A94B-B7056D1CC5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA4884E-CD94-44F0-A94B-B7056D1CC5DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F5F4F49-8B03-43AD-8891-1BB9459CFE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F5F4F49-8B03-43AD-8891-1BB9459CFE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F5F4F49-8B03-43AD-8891-1BB9459CFE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F5F4F49-8B03-43AD-8891-1BB9459CFE61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95D8EBBA-7FEB-4FC9-B713-BEC1612249A3}
+	EndGlobalSection
+EndGlobal
