@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.SignalR.Client;
 using Net5.SignalR.Chat.BackEnd.Application;
 using Net5.SignalR.Chat.BackEnd.Infrastructure.DTO;
 
@@ -16,14 +16,14 @@ namespace Net5.SignalR.Chat.BackEnd.Controllers
     public class RoomsController : ControllerBase
     {
         private readonly IChatApplicationService _chatApplicationService;
-      //  private readonly HubConnection _chatHubConnection;
+        private readonly HubConnection _chatHubConnection;
         public RoomsController(IChatApplicationService chatApplicationService)
         {
             _chatApplicationService = chatApplicationService;
-         /*   _chatHubConnection = new HubConnectionBuilder()
+            _chatHubConnection = new HubConnectionBuilder()
                 .WithUrl("https://localhost:44364/ChatHub")
                 .Build();
-         */
+         
         }
 
 
@@ -56,8 +56,8 @@ namespace Net5.SignalR.Chat.BackEnd.Controllers
         public async Task<RoomDto> PostAsync([FromBody] RoomDto room)
         {
             room = _chatApplicationService.InsertRoom(room);
-           // await _chatHubConnection.StartAsync();
-            //await _chatHubConnection.InvokeAsync("ListRoomsServer");
+            await _chatHubConnection.StartAsync();
+            await _chatHubConnection.InvokeAsync("ListRoomsServer");
 
             return room;
         }       

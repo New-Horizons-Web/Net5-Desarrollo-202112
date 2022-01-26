@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.SignalR.Client;
 using Net5.SignalR.Chat.BackEnd.Application;
 using Net5.SignalR.Chat.BackEnd.Infrastructure.DTO;
 
@@ -16,14 +16,14 @@ namespace Net5.SignalR.Chat.BackEnd.API.Controllers
     public class RoomUsersController : ControllerBase
     {
         private readonly IChatApplicationService _chatApplicationService;
-        //private readonly HubConnection _chatHubConnection;
+        private readonly HubConnection _chatHubConnection;
         public RoomUsersController(IChatApplicationService chatApplicationService)
         {
             _chatApplicationService = chatApplicationService;
-            /*_chatHubConnection = new HubConnectionBuilder()
+            _chatHubConnection = new HubConnectionBuilder()
                 .WithUrl("https://localhost:44364/ChatHub")
                 .Build();
-            */
+            
         }
 
         [HttpGet()]
@@ -39,8 +39,8 @@ namespace Net5.SignalR.Chat.BackEnd.API.Controllers
         {
             roomUser = _chatApplicationService.InsertRoomUser(roomUser);
 
-            //await _chatHubConnection.StartAsync();
-            //await _chatHubConnection.InvokeAsync("ListUsersByRoomIdServer",roomUser.RoomId);
+            await _chatHubConnection.StartAsync();
+            await _chatHubConnection.InvokeAsync("ListUsersByRoomIdServer",roomUser.RoomId);
 
             return roomUser;
         }
@@ -49,8 +49,8 @@ namespace Net5.SignalR.Chat.BackEnd.API.Controllers
         {
             roomUser = _chatApplicationService.UpdateRoomUser(roomUser);
 
-            //await _chatHubConnection.StartAsync();
-            //await _chatHubConnection.InvokeAsync("ListUsersByRoomIdServer", roomUser.RoomId);
+            await _chatHubConnection.StartAsync();
+            await _chatHubConnection.InvokeAsync("ListUsersByRoomIdServer", roomUser.RoomId);
 
             return roomUser;
         }

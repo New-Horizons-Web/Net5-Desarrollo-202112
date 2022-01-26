@@ -44,10 +44,10 @@ export class AddRoomComponent implements OnInit {
     const roomForm = form;
     this.dataService.getRoomByRoomName(roomForm.RoomName).subscribe(room => {
       //commet
-      this.goToRoomList();
-      /*
+      //this.goToRoomList();
+      
       if (room) {
-        this.snackBar.open('Room name already exist!',null, {
+        this.snackBar.open('Room name already exist!','', {
           duration: 3000,
         });
       } else {
@@ -57,8 +57,7 @@ export class AddRoomComponent implements OnInit {
         this.dataService.insertRoom(room).subscribe(() => {
           this.goToRoomList();
         });
-      }
-      */
+      }      
     });
   }
 

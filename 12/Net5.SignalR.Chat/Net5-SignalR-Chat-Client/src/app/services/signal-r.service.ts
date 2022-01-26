@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-//import * as signalR from "@microsoft/signalr";
+import * as signalR from "@microsoft/signalr";
 import { Chat } from '../models/chat';
 import { User } from '../models/user';
 
@@ -14,7 +14,7 @@ export class SignalRService {
   connectionEstablished = new EventEmitter<boolean>();
 
   private connectionIsEstablished = false;
-  //private _hubConnection: signalR.HubConnection;
+  private _hubConnection!: signalR.HubConnection;
 
   constructor() {
     this.createConnection();
@@ -22,16 +22,13 @@ export class SignalRService {
     this.startConnection();
   }
 
-  private createConnection() {
-    /*
+  private createConnection() {    
     this._hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:44355/ChatHub')
-      .build();
-      */
+      .withUrl('https://localhost:44364/ChatHub')
+      .build();      
   }
 
-  private startConnection(): void {
-    /*
+  private startConnection(): void {    
     this._hubConnection
       .start()
       .then(() => {
@@ -41,13 +38,11 @@ export class SignalRService {
       })
       .catch(err => {
         console.log('Error while establishing connection, retrying...');
-        setTimeout(function () { this.startConnection(); }, 5000);
-      });
-      */
+        setTimeout( () => { this.startConnection(); }, 5000);
+      });      
   }
 
-  private registerClientEventsOnServer(): void {
-    /*
+  private registerClientEventsOnServer(): void {    
     this._hubConnection.on('ListRoomsClient', () => {
       this.onListRooms.emit();
     });
@@ -56,10 +51,9 @@ export class SignalRService {
     });
     this._hubConnection.on('ListUsersByRoomIdClient', (roomId: number) => {
       this.onListUsersByRoomId.emit(roomId);
-    });
-    */
+    });    
   }
   public SendChat(chat: Chat) {
-    //return this._hubConnection.send("SendChatServer", chat);
+    return this._hubConnection.send("SendChatServer", chat);
   }
 }

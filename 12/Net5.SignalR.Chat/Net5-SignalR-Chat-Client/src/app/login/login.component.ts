@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   onFormSubmit(form: any) {
     const login = form;
-    this.dataService.getUserByUserName(login.nickname).subscribe(user => {
+    this.dataService.getUserByUserName(login.nickname).subscribe(user => {      
       if (user) {
         sessionStorage.setItem('userSAChat', JSON.stringify(user));
         this.goToRoomList();

@@ -76,14 +76,12 @@ export class ListRoomComponent implements OnInit {
     chat.Type = 'join';
 
     /*comment*/
-    this.router.navigate(['/chatroom', roomId]);
-    /*
+    //this.router.navigate(['/chatroom', roomId]);    
     this.signalRService.SendChat(chat).then(() => {
       this.dataService.insertChat(chat).subscribe(() => {
         this.router.navigate(['/chatroom', roomId]);
       });
     });
-    */
   }
 
   logout(): void {

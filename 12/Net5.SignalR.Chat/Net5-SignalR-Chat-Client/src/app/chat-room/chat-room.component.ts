@@ -78,16 +78,17 @@ export class ChatRoomComponent implements OnInit {
 
     this.dataService.insertChat(newChat).subscribe(chat => {
       //comment
+      /*
       this.chatForm = this.formBuilder.group({
         'Message': [null, Validators.required]
       });
-      /*
+      */
+      
       this.signalRService.SendChat(chat).then(() => {
         this.chatForm = this.formBuilder.group({
           'Message': [null, Validators.required]
         });
-      });
-      */
+      });      
     });
   }
 
@@ -100,8 +101,9 @@ export class ChatRoomComponent implements OnInit {
     newChat.Message = `${this.userLogin.UserName} leave the room`;
 
     this.dataService.insertChat(newChat).subscribe((chat) => {
-      this.router.navigate(['/listroom']);
-      /*
+      //comment
+      //this.router.navigate(['/listroom']);
+      
       this.signalRService.SendChat(chat).then(() => {
         this.dataService.getRoomUserByRoomIdAndUserId(chat.RoomId, chat.UserId).subscribe((roomUser) => {
           if (roomUser) {
@@ -111,8 +113,7 @@ export class ChatRoomComponent implements OnInit {
             })
           }
         });
-      });
-      */
+      });      
     });
   }
 
