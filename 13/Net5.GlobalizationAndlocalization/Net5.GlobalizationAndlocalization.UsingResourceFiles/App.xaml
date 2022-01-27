@@ -1,0 +1,9 @@
+﻿<Application x:Class="Net5.GlobalizationAndlocalization.UsingResourceFiles.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Net5.GlobalizationAndlocalization.UsingResourceFiles"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+    </Application.Resources>
+</Application>
