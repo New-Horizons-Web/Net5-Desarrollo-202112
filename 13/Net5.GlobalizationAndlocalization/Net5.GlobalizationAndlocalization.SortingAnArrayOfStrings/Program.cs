@@ -13,6 +13,7 @@ namespace Net5.GlobalizationAndlocalization.SortingAnArrayOfStrings
 
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
+            //Array.Sort(names);
             Array.Sort(names, StringComparer.OrdinalIgnoreCase);
 
             foreach (var name in names)

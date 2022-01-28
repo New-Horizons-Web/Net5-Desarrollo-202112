@@ -19,12 +19,12 @@ namespace Net5.GlobalizationAndlocalization.Infrastructure
                 assembly = Assembly.GetExecutingAssembly()
                 .GetSatelliteAssembly(CultureInfo.CurrentCulture);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 assembly = Assembly.GetExecutingAssembly();
             }
 
-            string resource = "Infrastructure.Data.products.json";
+            string resource = "Net5.GlobalizationAndlocalization.Infrastructure.Data.products.json";
 
             using (var stream = assembly.GetManifestResourceStream(resource))
             using (var reader = new StreamReader(stream))

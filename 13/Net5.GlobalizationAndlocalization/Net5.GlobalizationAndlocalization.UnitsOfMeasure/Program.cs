@@ -7,7 +7,8 @@ namespace Net5.GlobalizationAndlocalization.UnitsOfMeasure
     {
         static void Main(string[] args)
         {
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("sv-SE");
+            //CultureInfo culture = CultureInfo.CreateSpecificCulture("sv-SE");
+            CultureInfo culture = new CultureInfo("en-US");
 
             RegionInfo region = new RegionInfo(culture.LCID);
 

@@ -11,8 +11,7 @@ namespace Net5.GlobalizationAndlocalization.UsingResourceFiles
     {
         public App()
         {
-            CultureInfo.CurrentUICulture =
-                CultureInfo.CreateSpecificCulture("sv");
+            CultureInfo.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr-FR");
         }
     }
 }

@@ -14,11 +14,9 @@ namespace Net5.GlobalizationAndlocalization.ParsingAndPersistingNumbers
             // 1_000_000.5.ToString("C", new CultureInfo("sv-SE"));
 
             var numberAsString = "1 000 000,5 kr";
+            //decimal num = decimal.Parse(numberAsString,NumberStyles.Currency,new CultureInfo("sv-SE"));
 
-            if (decimal.TryParse(numberAsString,
-                NumberStyles.Currency,
-                new CultureInfo("sv-SE"),
-                out decimal number))
+            if (decimal.TryParse(numberAsString,NumberStyles.Currency,new CultureInfo("sv-SE"),out decimal number))
             {
                 Console.WriteLine(number);
             }

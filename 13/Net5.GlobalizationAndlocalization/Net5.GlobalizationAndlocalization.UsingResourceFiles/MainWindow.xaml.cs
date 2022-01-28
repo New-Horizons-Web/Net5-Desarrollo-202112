@@ -1,4 +1,5 @@
 ﻿using Net5.GlobalizationAndlocalization.Domain;
+using Net5.GlobalizationAndlocalization.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

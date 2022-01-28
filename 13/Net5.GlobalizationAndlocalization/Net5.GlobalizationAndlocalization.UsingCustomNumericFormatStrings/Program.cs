@@ -13,7 +13,7 @@ namespace Net5.GlobalizationAndlocalization.UsingCustomNumericFormatStrings
             var culture = CultureInfo.CreateSpecificCulture("en-US");
             culture.NumberFormat.NumberGroupSeparator = " ";
 
-            decimal number = 1_000.50m;
+            decimal number = 1.5m;
 
             string numberAsString =
                 number.ToString("#,#.#", culture);
@@ -23,6 +23,8 @@ namespace Net5.GlobalizationAndlocalization.UsingCustomNumericFormatStrings
 
             Console.WriteLine(numberAsString);
             Console.WriteLine(numberAsStringSwedish);
+            Console.WriteLine(number.ToString("00.00",culture));
+            Console.WriteLine(number.ToString("00.00", new CultureInfo("sv-SE")));
         }
     }
 }

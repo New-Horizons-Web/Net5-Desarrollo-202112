@@ -12,4 +12,17 @@
     <ProjectReference Include="..\Net5.GlobalizationAndlocalization.Domain\Net5.GlobalizationAndlocalization.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	  <None Remove="Data\products.en-US.json" />
+	  <None Remove="Data\products.fr-FR.json" />
+	  <None Remove="Data\products.json" />
+	  <None Remove="Data\products.sv-SE.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Data\products.en-US.json" />
+	  <EmbeddedResource Include="Data\products.fr-FR.json" />
+	  <EmbeddedResource Include="Data\products.json" />
+	  <EmbeddedResource Include="Data\products.sv-SE.json" />
+	</ItemGroup>
 </Project>
