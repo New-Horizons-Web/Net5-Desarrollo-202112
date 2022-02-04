@@ -20,7 +20,7 @@ jobs:
     - name: Publish
       run: dotnet publish "./14/Net5.Deployment/Net5.Deployment.API" -c Release -o Api
     - name: Run Azure appservice deploy
-      uses: Azure/webapps-deploy@v2
+      uses: azure/webapps-deploy@v2
       with:
         app-name: net5-deployment-api
         publish-profile: ${{ NET5_DEPLOYMENT_API }}
